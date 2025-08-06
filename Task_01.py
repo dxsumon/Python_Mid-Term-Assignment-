@@ -22,8 +22,8 @@ class StudentDatabase:
     @classmethod
     def enrolling_student(cls):
         name = input("Name: ")
-        roll = input("Roll: ")
-        student_id = cls.student_count + 1
+        roll = cls.student_count + 1
+        student_id = cls.student_count + 101
         age = input("Age: ")
         department = input("Department: ")
         semester = input("Semester: ")
@@ -51,20 +51,25 @@ class Student(StudentDatabase):
 
     @classmethod
     def enroll_student(cls):
-        check_student_id = int(input("Enter student_ID: "))
-        for student in cls.student_list:
-            if student._student_id == check_student_id:
-                if not student._Student__is_enrolled:
-                    student._Student__is_enrolled = True
-                    print("Student has been enrolled.")
-                    return
-                else:
-                    print("Student is already enrolled.")
-                    return
-        txt = input(f"""This Student ID: {check_student_id} is not enrolled!
-        Do you want to enroll? (Y/N): """)
-        if txt.lower() == "y":
-            cls.enrolling_student()
+        student_index = input("Enter student_ID: ")
+        if student_index.isdigit():
+            check_student_id = int(student_index)
+            for student in cls.student_list:
+                if student._student_id == check_student_id:
+                    if not student._Student__is_enrolled:
+                        student._Student__is_enrolled = True
+                        print("Student has been enrolled.")
+                        return
+                    else:
+                        print("Student is already enrolled.")
+                        return
+            txt = input(f"""This Student ID: {check_student_id} is not enrolled!
+            Do you want to enroll? (Y/N): """)
+            if txt.lower() == "y":
+                cls.enrolling_student()
+        
+        print(f"Only digit!!!")
+        return
 
     @classmethod
     def drop_student(cls):
@@ -85,7 +90,6 @@ class Student(StudentDatabase):
                 print(f"Student {id} has been deleted.")
                 return
         print(f"This Student ID : {id} does not exist")
-        
 std1 = Student("Sumon Barmon", 1, 101, 21, "Computer Department", "5th", "dxsumon14567@gmail.com", "01300999114", "Gazipur", True)
 std2 = Student("Rahim Islam", 2, 102, 22, "Computer Department", "5th", "rahimislam8870@gmail.com", "0139202302", "Dhaka", True)
 std3 = Student("Mahim Hassan", 3, 103, 22, "Computer Department", "5th", "mahimhassan@gmail.com", "0191291202", "Gazipur", True)
