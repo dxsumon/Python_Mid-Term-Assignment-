@@ -10,12 +10,14 @@ class StudentDatabase:
                 print(f"This student is already Enroll")
                 return
         cls.student_list.append(student_details)
-        print(f"{student_details.name} has been student Added")
+        # print(f"{student_details.name} has been student Added")
         cls.student_count +=1
+        
     @classmethod
     def view_student_info(cls):
         for student in cls.student_list:
             print(f"ID {student.student_id} Name: {student.name} Department: {student.department} Enrolled: {student.is_enrolled}")
+            
     @classmethod
     def enrolling_student(cls):
         name = input("Name: ")
@@ -44,7 +46,7 @@ class Student(StudentDatabase):
         self.phone = phone
         self.address = address
         self.is_enrolled = is_enrolled
-        super().__init__()    
+        super().__init__()
     def enroll_student(cls):
         check_student_id = int(input("Enter student_ID: "))
         for student in cls.student_list:
@@ -87,8 +89,25 @@ std3 = Student("Mahim Hassan",3,103,22,"Computer Department","5th","mahimhassan@
 StudentDatabase.add_student(std1)
 StudentDatabase.add_student(std2)
 StudentDatabase.add_student(std3)
-StudentDatabase.view_student_info()
 
-std3.drop_student()
-
-StudentDatabase.view_student_info()
+while True:
+    print("---- Student Management Menu ----")
+    choice = int(input(f"""1. View All Students
+2. Enroll Student
+3. Drop Student
+4. Delete Student
+5. Exit
+Enter your Choice (1-5): """))
+    print(choice)
+    if choice == 1:
+        StudentDatabase.view_student_info()
+    elif choice == 2:
+        std3.enroll_student()
+    elif choice == 3:
+        std3.drop_student()
+    elif choice == 4:
+        std3.delete_student()
+    elif choice == 5:
+        break
+    else:
+        print("Note: Invalid input please type (1-5) number only: ")
