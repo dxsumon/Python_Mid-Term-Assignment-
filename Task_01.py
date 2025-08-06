@@ -60,18 +60,35 @@ class Student(StudentDatabase):
             cls.enrolling_student()
         else:
             return
+    
+    def drop_student(self):
+        id = int(input("Enter Student ID to drop: "))
+        for student in self.student_list:
+            if student.student_id == id:
+                print(f"Student {id} has been dropped")
+                student.is_enrolled = False
+                return
+        print(f"This Student ID : {id} is not exist")
+        
+    def delete_student(self):
+        id = int(input("Enter Student ID to drop: "))
+        for student in self.student_list:
+            if student.student_id == id:
+                print(f"Student {id} has been dropped")
+                self.student_list.remove(student)
+                return
+        print(f"This Student ID : {id} is not exist")
+
 std1 = Student("Sumon Barmon",1,101,21,"Computer Department","5th","dxsumon14567@gmail.com", "01300999114", "Gazipur", True)
 std2 = Student("Rahim Islam",2,102,22,"Computer Department","5th","rahimislam8870@gmail.com", "0139202302", "Dhaka", True)
-std3 = Student("Mahim Hassan",3,103,22,"Computer Department","5th","mahimhassan@gmail.com", "0191291202", "Gazipur", False)
-std4 = Student("Mahim Hassan",3,103,22,"Computer Department","5th","mahimhassan@gmail.com", "0191291202", "Gazipur", False)
+std3 = Student("Mahim Hassan",3,103,22,"Computer Department","5th","mahimhassan@gmail.com", "0191291202", "Gazipur", True)
 
 
 StudentDatabase.add_student(std1)
 StudentDatabase.add_student(std2)
 StudentDatabase.add_student(std3)
-StudentDatabase.add_student(std4)
 StudentDatabase.view_student_info()
 
-std4.enroll_student()
+std3.drop_student()
+
 StudentDatabase.view_student_info()
-StudentDatabase.student_count
