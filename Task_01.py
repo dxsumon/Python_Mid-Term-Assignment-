@@ -73,12 +73,20 @@ class Student(StudentDatabase):
 
     @classmethod
     def drop_student(cls):
-        id = int(input("Enter Student ID to drop: "))
+        student_idx = input("Enter Student ID: ")
+        if not student_idx.isdigit():
+            print("Invalid input!!! Input can be only number.Please Try again!!")
+            return
+        id = int(student_idx)
         for student in cls.student_list:
             if student._student_id == id:
-                student._Student__is_enrolled = False
-                print(f"Student {id} has been dropped (not deleted).")
-                return
+                if student._Student__is_enrolled == True:
+                    student._Student__is_enrolled = False
+                    print(f"Student {id} has been dropped (not deleted).")
+                    return
+                else:
+                    print("This student is not Enrolled!!")
+                    return
         print(f"This Student ID : {id} does not exist")
 
     @classmethod
